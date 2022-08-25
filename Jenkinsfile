@@ -43,11 +43,7 @@ pipeline{
                 sh 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
             }
         }
-        stage("package"){
-            steps{
-                sh 'mvn package'
-            }
-        }
+        
         
     }
 }
