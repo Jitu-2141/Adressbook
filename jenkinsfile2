@@ -1,0 +1,91 @@
+pipeline{
+    tools{
+        jdk 'JAVA_HOME'
+        maven 'M2_HOME'
+    }
+    agent any
+    stages{
+    
+    
+    
+        stage("checkout"){
+		agent{
+	label 'sarthak12345'
+	
+	}
+            steps{
+                git credentialsId: 'a2d1c8f2-9cb1-46eb-88de-bb8f0a3f5718', url: 'https://github.com/sart-glitch/sarthak1.git'
+            }
+        }
+        stage("clean"){
+		agent{
+	label 'sarthak12345'
+	
+	}
+	tools{
+        jdk 'JAVA_WIN'
+        maven 'MAVEN_WIN'
+    }
+            steps{
+                bat 'mvn clean'
+            }
+        }
+        stage("compile"){
+            agent{
+	label 'sourav12345'
+	
+	}
+		tools{
+        jdk 'JAVA_LIN'
+        maven 'MAVEN_LIN'
+    }
+            steps{
+			 git credentialsId: 'a2d1c8f2-9cb1-46eb-88de-bb8f0a3f5718', url: 'https://github.com/sart-glitch/sarthak1.git'
+                sh 'mvn compile'
+            }
+        }
+        stage("code-review"){
+		agent{
+	label 'sarthak12345'
+	
+	}
+		tools{
+        jdk 'JAVA_WIN'
+        maven 'MAVEN_WIN'
+    }
+            steps{
+			
+                bat 'mvn pmd:pmd'
+            }
+        }
+        stage("test"){
+		agent{
+	label 'sarthak12345'
+	
+	}
+		tools{
+        jdk 'JAVA_WIN'
+        maven 'MAVEN_WIN'
+    }
+            steps{
+                bat 'mvn test'
+            }
+        }
+       
+        stage("code coverage"){
+		agent{
+	label 'sarthak12345'
+	
+	}
+		tools{
+        jdk 'JAVA_WIN'
+        maven 'MAVEN_WIN'
+    }
+            steps{
+                bat 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
+            }
+        }
+        
+        
+    }
+}
