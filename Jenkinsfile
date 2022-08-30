@@ -13,7 +13,7 @@ pipeline{
     //{
       /*  label 'sarthak12345'
     }*/
-    //environment{ sarthak
+    //environment{ sart
         //PATH="C:\Users\Sarthak Sourav\Desktop\apache-maven-3.3.9\bin:$PATH"
     //}
     
