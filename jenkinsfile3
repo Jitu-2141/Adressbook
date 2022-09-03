@@ -1,0 +1,65 @@
+pipeline{
+tools{
+jdk 'JAVA_HOME'
+maven 'M2_HOME'
+}
+agent any
+stages{
+
+	stage("checkout"){
+		steps{
+			git credentialsId: 'a2d1c8f2-9cb1-46eb-88de-bb8f0a3f5718', url: 'https://github.com/sart-glitch/sarthak1.git'
+		}
+	}
+	stage("compile"){
+		steps{
+			sh 'mvn compile'
+		}
+	}
+	stage("code review"){
+		steps{
+		 sh 'mvn pmd:pmd'
+		}
+		post{
+                    always{
+                        recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml')
+                    }
+                }
+	}
+	stage("unit test"){
+		steps{
+			sh 'mvn test'
+		}
+		post {
+      always {
+        junit 'target/surefire-reports/*.xml'
+      }
+   } 
+	}
+	stage("code coverage"){
+		steps{
+			sh 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
+		}
+		post{
+                    always{
+                        cobertura coberturaReportFile: 'target/site/cobertura/coverage.xml'
+                    }
+                }
+	}
+	stage("package"){
+		steps{
+			sh 'mvn package'
+		}
+	}
+		 stage("deploy")
+	 {
+	  steps{
+	         deploy adapters: [tomcat7(credentialsId: 'tomcatmanual', path: '', url: 'http://34.214.159.26:8080/')], contextPath: 'sarthak', war: '**/*.war'
+               
+			 
+               }
+		}
+		 
+
+}
+}

@@ -13,7 +13,7 @@ pipeline{
     //{
       /*  label 'sarthak12345'
     }*/
-    //environment{
+    //environment{ sart
         //PATH="C:\Users\Sarthak Sourav\Desktop\apache-maven-3.3.9\bin:$PATH"
     //}
     
@@ -41,6 +41,11 @@ pipeline{
         stage("code coverage"){
             steps{
                 sh 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
+            }
+        }
+        stage("package"){
+            steps{
+                sh 'mvn package'
             }
         }
         
