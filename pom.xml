@@ -16,7 +16,7 @@
     </properties>
 	
 
-    <repositories>
+    <repositories.inv>
         <repository>
             <id>vaadin-prereleases</id>
             <name>Vaadin Pre-releases</name>
