@@ -32,7 +32,7 @@ pipeline{
         }
         stage("compile"){
             agent{
-	label 'sourav12345'
+	label 'sourab12345'
 	
 	}
 		tools{
