@@ -157,7 +157,7 @@
   <!-- ====================================================================== -->
   <!-- Test-compilation target                                                -->
   <!-- ====================================================================== -->
-  <target name="compile-tests-1" 
+  <target name="compile-tests" 
           depends="compile" 
           description="Compiles the test code, unless maven's skip test property is unset">
     <mkdir dir="${maven.build.testOutputDir}"/>
