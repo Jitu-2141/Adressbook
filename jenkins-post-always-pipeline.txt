@@ -38,7 +38,7 @@ stages{
 	}
 	stage("code coverage"){
 		steps{
-			sh 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
+			sh 'mvn cobertura:cobertura file.xml -Dcobertura.report.format=xml'
 		}
 		post{
                     always{
