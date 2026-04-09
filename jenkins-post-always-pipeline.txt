@@ -48,7 +48,7 @@ stages{
 	}
 	stage("package"){
 		steps{
-			sh 'mvn package'jt.xb
+			sh 'mvn package'
 		}
 	}
 
